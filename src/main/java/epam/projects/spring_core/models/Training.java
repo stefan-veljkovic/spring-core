@@ -1,12 +1,16 @@
 package epam.projects.spring_core.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.Objects;
 
 import static java.util.Objects.*;
 
+@Setter
+@Getter
 @Entity
 public class Training {
     @Id
@@ -16,66 +20,21 @@ public class Training {
     @ManyToOne
     private TrainingType trainingType;
     private Date trainingDate;
-    private Date trainingDuration;
+    private int trainingDuration;
     @ManyToOne
     private Trainer trainer;
     @ManyToOne
     private Trainee trainee;
 
-    public TrainingId getTrainingId() {
-        return trainingId;
+    public Training(int traineeId, int trainerId, String name, Date date, int duration){
+        this.trainingId = new TrainingId(traineeId,trainerId);
+        this.trainingName=name;
+        this.trainingDate=date;
+        this.trainingDuration=duration;
     }
 
-    public void setTrainingId(TrainingId trainingId) {
-        this.trainingId = trainingId;
-    }
+    public Training(){
 
-    public String getTrainingName() {
-        return trainingName;
-    }
-
-    public void setTrainingName(String trainingName) {
-        this.trainingName = trainingName;
-    }
-
-    public TrainingType getTrainingType() {
-        return trainingType;
-    }
-
-    public void setTrainingType(TrainingType trainingType) {
-        this.trainingType = trainingType;
-    }
-
-    public Date getTrainingDate() {
-        return trainingDate;
-    }
-
-    public void setTrainingDate(Date trainingDate) {
-        this.trainingDate = trainingDate;
-    }
-
-    public Date getTrainingDuration() {
-        return trainingDuration;
-    }
-
-    public void setTrainingDuration(Date trainingDuration) {
-        this.trainingDuration = trainingDuration;
-    }
-
-    public Trainer getTrainer() {
-        return trainer;
-    }
-
-    public void setTrainer(Trainer trainer) {
-        this.trainer = trainer;
-    }
-
-    public Trainee getTrainee() {
-        return trainee;
-    }
-
-    public void setTrainee(Trainee trainee) {
-        this.trainee = trainee;
     }
 
     @Override
@@ -83,11 +42,24 @@ public class Training {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Training training = (Training) o;
-        return trainingId.equals(training.trainingId) && trainingName.equals(training.trainingName) && trainingType.equals(training.trainingType) && trainingDate.equals(training.trainingDate) && trainingDuration.equals(training.trainingDuration) && Objects.equals(trainer, training.trainer) && trainee.equals(training.trainee);
+        return trainingId.equals(training.trainingId) && trainingName.equals(training.trainingName) && trainingType.equals(training.trainingType) && trainingDate.equals(training.trainingDate) && trainingDuration == training.trainingDuration && Objects.equals(trainer, training.trainer) && trainee.equals(training.trainee);
     }
 
     @Override
     public int hashCode() {
         return hash(trainingId, trainingName, trainingType, trainingDate, trainingDuration, trainer, trainee);
+    }
+
+    @Override
+    public String toString() {
+        return "Training{" +
+                "trainingId=" + trainingId +
+                ", trainingName='" + trainingName + '\'' +
+                ", trainingType=" + trainingType +
+                ", trainingDate=" + trainingDate +
+                ", trainingDuration=" + trainingDuration +
+                ", trainer=" + trainer +
+                ", trainee=" + trainee +
+                '}';
     }
 }

@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "firstName": "John",
+    "lastName": "Doe",
+    "username": "John.Doe",
+    "password": "SecurePassword123",
+    "isActive": true,
+    "dateOfBirth": "20-03-2005",
+    "address": "123 Fitness Street",
+    "group": "trainees"
+  },
+  {
+    "id": 2,
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "username": "Jane.Smith",
+    "password": "SecurePassword456",
+    "isActive": true,
+    "dateOfBirth": "15-08-1998",
+    "address": "456 Gym Avenue",
+    "group": "trainees"
+  },
+  {
+    "id": 1,
+    "firstName": "Mike",
+    "lastName": "Trainer",
+    "username": "Mike.Trainer",
+    "password": "TrainerPassword789",
+    "isActive": true,
+    "specialization": "Cardio & Strength",
+    "group": "trainers"
+  },
+  {
+    "id": 1,
+    "traineeId": 1,
+    "trainerId": 1,
+    "trainingName": "Morning Cardio Blast",
+    "trainingType": "Fitness",
+    "trainingDate": "30-10-2027 09:30:00",
+    "trainingDuration": 60,
+    "group": "trainings"
+  }
+]

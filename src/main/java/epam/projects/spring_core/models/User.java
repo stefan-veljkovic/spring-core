@@ -1,69 +1,42 @@
 package epam.projects.spring_core.models;
 
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
-
-import java.util.Objects;
+import jakarta.validation.constraints.Pattern;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 
 import static java.util.Objects.*;
+@Setter
+@Getter
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
+    @Nonnull
+    @NonNull
     private String username;
+    @Nonnull
+    @NonNull
+    @Pattern(regexp = "[A-Z][a-z]+", message = "First letter should be uppercase while all other lowercase")
     private String firstName;
+    @Nonnull
+    @NonNull
+    @Pattern(regexp = "[A-Z][a-z]+", message = "First letter should be uppercase while all other lowercase")
     private String lastName;
     private String password;
     private boolean isActive;
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
+    public User(String firstName, String lastName, String password) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
+        this.username = firstName + "." + lastName;
         this.password = password;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+        this.isActive = true;
     }
 
     @Override
@@ -77,5 +50,17 @@ public class User {
     @Override
     public int hashCode() {
         return hash(userId, username, firstName, lastName, password, isActive);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                ", isActive=" + isActive +
+                '}';
     }
 }

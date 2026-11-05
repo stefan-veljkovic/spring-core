@@ -1,12 +1,16 @@
 package epam.projects.spring_core.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 import static java.util.Objects.*;
 
 
+@Setter
+@Getter
 @Entity
 @PrimaryKeyJoinColumn(name = "user_id")
 public class Trainer extends User{
@@ -16,28 +20,15 @@ public class Trainer extends User{
     @ManyToOne
     private TrainingType trainingType;
 
-    public List<Training> getTrainings() {
-        return trainings;
+    public Trainer(String firstName, String lastName, String password) {
+        super(firstName, lastName, password);
     }
-
-    public void setTrainings(List<Training> trainings) {
-        this.trainings = trainings;
+    public Trainer(int id){
+        super(null,null,null);
+        super.setUserId(id);
     }
-
-    public String getSpecialization() {
-        return specialization;
-    }
-
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
-    }
-
-    public TrainingType getTrainingType() {
-        return trainingType;
-    }
-
-    public void setTrainingType(TrainingType trainingType) {
-        this.trainingType = trainingType;
+    public Trainer() {
+        super(null,null,null);
     }
 
     @Override
@@ -52,5 +43,14 @@ public class Trainer extends User{
     @Override
     public int hashCode() {
         return hash(super.hashCode(), specialization, trainings, trainingType);
+    }
+
+    @Override
+    public String toString() {
+        return "Trainer{" +
+                "specialization='" + specialization + '\'' +
+                ", trainings=" + trainings +
+                ", trainingType=" + trainingType +
+                '}';
     }
 }
