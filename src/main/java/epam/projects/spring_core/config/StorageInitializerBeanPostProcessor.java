@@ -42,7 +42,7 @@ public class StorageInitializerBeanPostProcessor implements BeanPostProcessor {
             for (Map<String, Object> item : rawDataList) {
                 String group = (String) item.get("group");
                 int id = 0;
-                TrainingId id1;
+                TrainingId id1 = null;
                 try {
                     id = Integer.parseInt(item.get("id").toString());
                 } catch (NumberFormatException ex) {
@@ -88,7 +88,7 @@ public class StorageInitializerBeanPostProcessor implements BeanPostProcessor {
 
                 } else if ("trainings".equalsIgnoreCase(group)) {
                     Training training = new Training();
-                    training.setTrainingId(new TrainingId());
+                    training.setTrainingId(id1);
 
                     Object traineeIdObj = item.get("traineeId");
                     Object trainerIdObj = item.get("trainerId");

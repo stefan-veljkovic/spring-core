@@ -1,6 +1,7 @@
 package epam.projects.spring_core.DAOs;
 
 import epam.projects.spring_core.models.Trainee;
+import epam.projects.spring_core.storage.AppStorage;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
@@ -12,8 +13,8 @@ public class TraineeDao {
     private static final String NAMESPACE = "trainees";
     private final Map<String, Trainee> storage;
 
-    public TraineeDao(Map<String, Trainee> storage) {
-        this.storage = storage;
+    public TraineeDao(AppStorage storage) {
+        this.storage = storage.getNamespace(NAMESPACE);
     }
 
     public void createTrainee(Trainee trainee){
@@ -37,7 +38,7 @@ public class TraineeDao {
     public Trainee selectTrainee(Trainee trainee){
         Optional<Trainee> trainee1 = this.storage.values().stream().filter(t->t.getUserId().equals(trainee.getUserId())).findFirst();
         if(trainee1.isEmpty())
-            throw new IllegalArgumentException("Trainee with the username doesn't exist");
+            throw new IllegalArgumentException("Trainee with the user id doesn't exist");
         return trainee1.get();
     }
 }
