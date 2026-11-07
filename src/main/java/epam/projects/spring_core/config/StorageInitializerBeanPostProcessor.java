@@ -2,12 +2,12 @@ package epam.projects.spring_core.config;
 
 import epam.projects.spring_core.models.*;
 import epam.projects.spring_core.storage.AppStorage;
-import org.jspecify.annotations.NonNull;
+import jakarta.annotation.Nonnull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
-import tools.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -22,7 +22,7 @@ public class StorageInitializerBeanPostProcessor implements BeanPostProcessor {
     private Resource dataFileResource;
 
     @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) {
+    public Object postProcessBeforeInitialization(@Nonnull Object bean, @Nonnull String beanName) {
         if (bean instanceof AppStorage commonStorage) {
 
             ObjectMapper objectMapper = new ObjectMapper();
@@ -122,7 +122,7 @@ public class StorageInitializerBeanPostProcessor implements BeanPostProcessor {
     }
 
     @Override
-    public Object postProcessAfterInitialization(@NonNull Object bean, @NonNull String beanName) {
+    public Object postProcessAfterInitialization(@Nonnull Object bean, @Nonnull String beanName) {
         return bean;
     }
 }

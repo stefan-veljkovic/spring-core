@@ -24,7 +24,7 @@ public class Trainee extends User {
     }
 
     public Trainee(int id){
-        super(null,null,null);
+        this();
         super.setUserId(id);
     }
 

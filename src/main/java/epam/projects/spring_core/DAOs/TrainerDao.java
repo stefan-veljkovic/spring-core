@@ -32,7 +32,7 @@ public class TrainerDao {
     public Trainer selectTrainer(Trainer trainer){
         Optional<Trainer> result = this.storage.values().stream().filter(t->t.getUserId().equals(trainer.getUserId())).findFirst();
         if(result.isEmpty())
-            throw new IllegalArgumentException("Trainer with the username doesn't exist");
+            throw new IllegalArgumentException("Trainer with the user id doesn't exist");
         return result.get();
     }
 }
