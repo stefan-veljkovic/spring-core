@@ -26,8 +26,8 @@ public class Training {
     @ManyToOne
     private Trainee trainee;
 
-    public Training(int traineeId, int trainerId, String name, Date date, int duration){
-        this.trainingId = new TrainingId(traineeId,trainerId);
+    public Training(int id, int traineeId, int trainerId, String name, Date date, int duration){
+        this.trainingId = new TrainingId(id,traineeId,trainerId);
         this.trainingName=name;
         this.trainingDate=date;
         this.trainingDuration=duration;

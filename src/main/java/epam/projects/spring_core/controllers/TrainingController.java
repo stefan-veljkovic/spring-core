@@ -24,6 +24,6 @@ public class TrainingController {
 
     @PostMapping(value = "")
     public Training createTraining(int traineeId, int trainerId, String name, String date, int duration) {
-        return trainingService.createTraining(new Training(traineeId, trainerId, name, Date.from(LocalDate.parse(date).atStartOfDay(ZoneId.systemDefault()).toInstant()), duration));
+        return trainingService.createTraining(new Training(0, traineeId, trainerId, name, Date.from(LocalDate.parse(date).atStartOfDay(ZoneId.systemDefault()).toInstant()), duration));
     }
 }

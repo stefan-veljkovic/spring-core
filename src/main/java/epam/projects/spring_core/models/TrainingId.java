@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import static java.util.Objects.hash;
 
@@ -13,39 +14,62 @@ import static java.util.Objects.hash;
 @Getter
 @Embeddable
 public class TrainingId implements Serializable {
+    @Column(name = "id", insertable = false,updatable = false)
+    private int id;
     @Column(name = "trainee_id", insertable = false, updatable = false)
     private int traineeId;
     @Column(name = "trainer_id", insertable = false, updatable = false)
     private int trainerId;
 
-    public TrainingId(int traineeId, int trainerId) {
+    public TrainingId(int id,int traineeId, int trainerId) {
+        this.id = id;
         this.traineeId = traineeId;
         this.trainerId = trainerId;
     }
 
-    public TrainingId(){
-
-    }
+    public TrainingId(){}
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TrainingId that = (TrainingId) o;
-        return traineeId == that.traineeId && trainerId == that.trainerId;
+        if (!(o instanceof TrainingId that)) return false;
+        return id == that.id && traineeId == that.traineeId && trainerId == that.trainerId;
     }
 
     @Override
     public int hashCode() {
-        return hash(traineeId, trainerId);
+        return hash(id, traineeId, trainerId);
     }
 
     @Override
     public String toString() {
         return "TrainingId{" +
-                "traineeId=" + traineeId +
+                "id=" + id +
+                ", traineeId=" + traineeId +
                 ", trainerId=" + trainerId +
                 '}';
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getTraineeId() {
+        return traineeId;
+    }
+
+    public void setTraineeId(int traineeId) {
+        this.traineeId = traineeId;
+    }
+
+    public int getTrainerId() {
+        return trainerId;
+    }
+
+    public void setTrainerId(int trainerId) {
+        this.trainerId = trainerId;
+    }
 }

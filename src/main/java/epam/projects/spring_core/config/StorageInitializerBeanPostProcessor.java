@@ -46,7 +46,7 @@ public class StorageInitializerBeanPostProcessor implements BeanPostProcessor {
                 try {
                     id = Integer.parseInt(item.get("id").toString());
                 } catch (NumberFormatException ex) {
-                    id1 = new TrainingId(Integer.parseInt(item.get("traineeId").toString()), Integer.parseInt(item.get("trainerId").toString()));
+                    id1 = new TrainingId(0,Integer.parseInt(item.get("traineeId").toString()), Integer.parseInt(item.get("trainerId").toString()));
                 }
 
                 if ("trainees".equalsIgnoreCase(group)) {
@@ -93,7 +93,7 @@ public class StorageInitializerBeanPostProcessor implements BeanPostProcessor {
                     Object traineeIdObj = item.get("traineeId");
                     Object trainerIdObj = item.get("trainerId");
                     if (trainerIdObj != null)
-                        training.setTrainingId(new TrainingId(((Number) traineeIdObj).intValue(), ((Number) trainerIdObj).intValue()));
+                        training.setTrainingId(new TrainingId(0,((Number) traineeIdObj).intValue(), ((Number) trainerIdObj).intValue()));
 
                     training.setTrainingName((String) item.get("trainingName"));
                     training.setTrainingType(new TrainingType((String) item.get("trainingType")));
