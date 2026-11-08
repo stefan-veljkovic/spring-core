@@ -17,17 +17,20 @@ public class TrainerDao {
         this.storage = appStorage.getNamespace(NAMESPACE);
     }
 
-    public void createTrainer(Trainer trainer) {
+    public Trainer createTrainer(Trainer trainer) {
         String trainerUsername = trainer.getFirstName()+"."+trainer.getLastName();
         long trainerMatch = this.storage.values().stream().filter(t->t.getUsername().contains(trainerUsername)).count();
         if(trainerMatch>0)
             trainer.setUsername(trainerUsername+(trainerMatch+1));
+        trainer.setUserId(this.storage.size()+1);
         this.storage.put(trainer.getUsername(),trainer);
+        return this.storage.get(trainerUsername);
     }
-    public void updateTrainer(Trainer trainer){
+    public Trainer updateTrainer(Trainer trainer){
         if(this.storage.get(trainer.getUsername())==null)
             throw new IllegalArgumentException("Trainer with the username doesn't exist");
         this.storage.put(trainer.getUsername(),trainer);
+        return this.storage.get(trainer.getUsername());
     }
     public Trainer selectTrainer(Trainer trainer){
         Optional<Trainer> result = this.storage.values().stream().filter(t->t.getUserId().equals(trainer.getUserId())).findFirst();

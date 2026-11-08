@@ -1,41 +1,39 @@
 package epam.projects.spring_core.models;
 
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.Objects;
 
 import static java.util.Objects.*;
 @Setter
 @Getter
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
-    @Nonnull
-    @NonNull
+    @NotNull
     private String username;
-    @Nonnull
-    @NonNull
+    @NotNull
     @Pattern(regexp = "[A-Z][a-z]+", message = "First letter should be uppercase while all other lowercase")
     private String firstName;
-    @Nonnull
-    @NonNull
+    @NotNull
     @Pattern(regexp = "[A-Z][a-z]+", message = "First letter should be uppercase while all other lowercase")
     private String lastName;
     private String password;
     private boolean isActive;
 
-    public User(String firstName, String lastName, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(@NotNull String firstName, @NotNull String lastName, @NotNull String password) {
+        this.firstName = Objects.requireNonNull(firstName, () -> { throw new IllegalArgumentException("firstName cannot be null"); });
+        this.lastName = Objects.requireNonNull(lastName, () -> { throw new IllegalArgumentException("lastName cannot be null"); });
+        this.password = Objects.requireNonNull(password, () -> { throw new IllegalArgumentException("password cannot be null"); });
         this.username = firstName + "." + lastName;
-        this.password = password;
         this.isActive = true;
     }
 

@@ -22,14 +22,15 @@ public class TrainingDao {
         this.traineeStorage = appStorage.getNamespace("trainees");
     }
 
-    public void createTraining(Training training){
+    public Training createTraining(Training training){
         if(this.traineeStorage.values().stream().filter(t->t.getUserId().equals(training.getTrainingId().getTrainerId())).findFirst().isEmpty())
             throw new IllegalArgumentException("Training with id "+training.getTrainingId().getTraineeId()+" not found");
         if(this.trainerStorage.values().stream().filter(t->t.getUserId().equals(training.getTrainingId().getTraineeId())).findFirst().isEmpty())
             throw new IllegalArgumentException("Trainer with id "+training.getTrainingId().getTrainerId()+" not found");
         if(this.storage.get(training.getTrainingName())!=null)
             throw new IllegalArgumentException("Training with the name already exist");
-
+        this.storage.put(training.getTrainingName(),training);
+        return this.storage.get(training.getTrainingName());
     }
 
     public Training selectTraining(Training training){

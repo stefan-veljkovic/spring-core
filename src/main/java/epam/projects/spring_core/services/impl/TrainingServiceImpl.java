@@ -1,6 +1,7 @@
 package epam.projects.spring_core.services.impl;
 
 import epam.projects.spring_core.DAOs.TrainingDao;
+import epam.projects.spring_core.models.Trainer;
 import epam.projects.spring_core.models.Training;
 import epam.projects.spring_core.services.TrainerService;
 import epam.projects.spring_core.services.TrainingService;
@@ -17,8 +18,8 @@ public class TrainingServiceImpl implements TrainingService {
     @Autowired
     private AppStorage appStorage;
 
-    public void createTraining(Training training) {
-        this.trainingDao.createTraining(training);
+    public Training createTraining(Training training) {
+        return this.trainingDao.createTraining(training);
     }
 
     public Training selectTraining(Training training) {

@@ -19,8 +19,8 @@ public class TraineeController {
     }
 
     @PostMapping(value = "")
-    public void createTraineeProfile(@Valid @RequestBody TraineeDto traineeDto) {
-        traineeService.createTrainee(new Trainee(traineeDto.firstName(), traineeDto.lastName(), traineeDto.address()));
+    public Trainee createTraineeProfile(@Valid @RequestBody TraineeDto traineeDto) {
+        return traineeService.createTrainee(new Trainee(traineeDto.firstName(), traineeDto.lastName(), traineeDto.address()));
     }
     @GetMapping(value = "")
     public Trainee getTrainee(@RequestParam int id) {

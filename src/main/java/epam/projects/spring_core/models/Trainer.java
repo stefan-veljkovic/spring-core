@@ -24,11 +24,11 @@ public class Trainer extends User{
         super(firstName, lastName, password);
     }
     public Trainer(int id){
-        super(null,null,null);
+        super("","","");
         super.setUserId(id);
     }
     public Trainer() {
-        super(null,null,null);
+        super("","","");
     }
 
     @Override

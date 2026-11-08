@@ -4,8 +4,8 @@ import epam.projects.spring_core.models.Trainee;
 import epam.projects.spring_core.storage.AppStorage;
 import org.springframework.stereotype.Repository;
 
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Stream;
 
 @Repository
 public class TraineeDao {
@@ -17,13 +17,16 @@ public class TraineeDao {
         this.storage = storage.getNamespace(NAMESPACE);
     }
 
-    public void createTrainee(Trainee trainee){
+    public Trainee createTrainee(Trainee trainee){
         String traineeUsername = trainee.getFirstName()+"."+trainee.getLastName();
-        long nameMatch = storage.values().stream().filter(t->t.getUsername().contains(traineeUsername)).count();
+        Collection<Trainee> values = storage.values();
+        long nameMatch = values.stream().filter(t->t.getUsername().contains(traineeUsername)).count();
         if(nameMatch>0){
             trainee.setUsername(traineeUsername+(nameMatch+1));
         }
+        trainee.setUserId(values.size() +1);
         this.storage.put(trainee.getUsername(),trainee);
+        return this.storage.get(traineeUsername);
     }
     public void updateTrainee(Trainee trainee){
         if(storage.get(trainee.getUsername())==null)

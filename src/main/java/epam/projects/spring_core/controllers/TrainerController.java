@@ -18,8 +18,8 @@ public class TrainerController {
     }
 
     @PostMapping(value = "")
-    public void createTrainerProfile(@Valid @RequestBody TrainerDto trainerDto) {
-        trainerService.createTrainer(new Trainer( trainerDto.firstName(), trainerDto.lastName(), trainerDto.specialization()));
+    public Trainer createTrainerProfile(@Valid @RequestBody TrainerDto trainerDto) {
+        return trainerService.createTrainer(new Trainer( trainerDto.firstName(), trainerDto.lastName(), trainerDto.specialization()));
     }
     @GetMapping(value = "")
     public Trainer getTrainer(@RequestParam int id) {

@@ -1,6 +1,7 @@
 package epam.projects.spring_core.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +14,7 @@ import static java.util.Objects.*;
 @Getter
 @Entity
 @PrimaryKeyJoinColumn(name = "user_id")
+@AllArgsConstructor
 public class Trainee extends User {
     private Date dateOfBirth;
     private String address;
@@ -28,8 +30,8 @@ public class Trainee extends User {
         super.setUserId(id);
     }
 
-    public Trainee(){
-        super(null,null,null);
+    public Trainee() {
+        super("", "", "");
     }
 
     @Override

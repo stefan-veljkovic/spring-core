@@ -14,13 +14,13 @@ public class TrainerServiceImpl implements TrainerService {
 
 
     @Override
-    public void createTrainer(Trainer trainer) {
-        this.trainerDao.createTrainer(trainer);
+    public Trainer createTrainer(Trainer trainer) {
+        return this.trainerDao.createTrainer(trainer);
     }
 
     @Override
-    public void updateTrainer(Trainer trainer) {
-        this.trainerDao.updateTrainer(trainer);
+    public Trainer updateTrainer(Trainer trainer) {
+        return this.trainerDao.updateTrainer(trainer);
     }
 
     @Override

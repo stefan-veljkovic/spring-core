@@ -12,8 +12,8 @@ public class TraineeServiceImpl implements TraineeService {
     @Autowired
     private TraineeDao traineeDao;
 
-    public void createTrainee(Trainee trainee) {
-        this.traineeDao.createTrainee(trainee);
+    public Trainee createTrainee(Trainee trainee) {
+        return this.traineeDao.createTrainee(trainee);
     }
 
     public void updateTrainee(Trainee trainee) {
